@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Recette Générée</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            flex: 1;
+        }
+        .ingredient-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Générateur de Recettes</a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Recette Générée : {{ recipe.name }}</h1>
+        <h2>Ingrédients :</h2>
+        <div class="row">
+            {% for ingredient in ingredients %}
+                <div class="col-md-3 mb-4">
+                    <div class="card">
+                        <img src="{{ ingredient.image }}" alt="{{ ingredient.name }}" class="card-img-top ingredient-image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ ingredient.name }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h2>Étapes :</h2>
+        <ol>
+            {% for step in recipe.steps %}
+                <li>{{ step }}</li>
+            {% endfor %}
+        </ol>
+        <a class="btn btn-primary mt-3" href="/">Retour à l'accueil</a>
+        <button class="btn btn-primary mt-3" onclick="location.reload()">Recharger</button>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        © {{ current_year }} Générateur de Recettes
+    </footer>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
